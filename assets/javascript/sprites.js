@@ -16,7 +16,7 @@ function clearFrames(sprite) {
 	}
 }
 
-function incrementFrame(sprite, frames, loop) {
+function incrementFrame(sprite, frames, loop, onComplete) {
 	console.log('incrementFrame');
 	var div = $('#' + sprite);
 
@@ -33,6 +33,10 @@ function incrementFrame(sprite, frames, loop) {
 				if (!loop) {
 					clearInterval(incrementer);
 					incrementer = null;
+
+					if (onComplete != null) {
+						onComplete();
+					}
 				} else {
 					remove = true;
 				}
@@ -71,9 +75,24 @@ function animate(sprite, animation, loop) {
 	
 	var div = $('#' + sprite);
 	div.addClass('frame-0');
-	div.addClass('anim-' + animation);		
+
+	var frames;
+	var onComplete = null;
+
+	if (Array.isArray(animation)) {
+		div.addClass('anim-' + animation[0]);
+		frames = anim_frames[sprite][animation[0]];
+		onComplete = function() {
+			animation.shift();
+			animate(sprite, animation, false);
+		}
+		loop = false;		
+	} else {
+		div.addClass('anim-' + animation);		
+		frames = anim_frames[sprite][animation];
+	}
 
 	incrementer = setInterval(function() {
-		incrementFrame(sprite, anim_frames[sprite][animation], loop);		
+		incrementFrame(sprite, frames, loop, onComplete);		
 	}, 60);
 }
