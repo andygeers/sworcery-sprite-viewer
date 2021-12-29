@@ -5,19 +5,18 @@
 
 		<link rel="stylesheet" href="assets/css/layout.css"/>
 
-		<script src="assets/javascript/gen/boor.js"></script>
-		<link rel="stylesheet" href="assets/css/gen/boor.css"/>
+		<script type="text/javascript">
+			var anim_frames = {};
+		</script>
+		<script src="assets/javascript/gen/boor.js"></script>		
 	</head>	
-	<body>
-		<div class="boor frame-0" id="boor">
-			
-		</div>
-
-		<script type="text/javascript">			
-			//var anim = 'cliffjumpingE';
+	<body>		
+		<script type="text/javascript">						
 			var anim = 'idletravelDancing1';
-			animate('boor', anim);
-			//animate('boor', 'challenge1');			
+			//var anim = 'challenge1';
+			//var anim = 'cliffjumpingE';
+			configureSprite('boor');
+			animate('boor', anim, true);			
 		</script>
 	</body>
 </html>

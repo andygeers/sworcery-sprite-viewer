@@ -66,7 +66,7 @@ def process_animation(bits, sprite)
 
 	anim_css = ""
 	anim_js = <<EOF
-	anim_frames['#{anim_name}'] = #{frame_count};
+	anim_frames['#{sprite}']['#{anim_name}'] = #{frame_count};
 EOF
 
 	(0 ... frame_count).each do |frame_num|
@@ -129,9 +129,7 @@ css = <<EOF
 EOF
 
 js = <<EOF
-var anim_frames = {};
-var anim_offset_xs = {};
-var anim_offset_ys = {};
+anim_frames['#{sprite}'] = {};
 EOF
 
 anim_count.times do
